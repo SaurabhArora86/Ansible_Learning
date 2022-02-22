@@ -1,0 +1,8 @@
+---
+- name: When Condition example
+  hosts: all
+  tasks:
+    - name: Restart apache Service
+      service: name=apache2 status=started enabled=yes
+      become: true
+      when: ansible_os_family == "Debian"

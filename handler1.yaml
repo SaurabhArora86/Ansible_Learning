@@ -1,0 +1,22 @@
+---
+- name: Install Apache Server
+  become: true
+  hosts: virtualmachine
+  gather_facts: no
+  tasks:
+    - name: Install Apache
+      apt:
+        name: docker
+        state: absent
+    # - name: copy index file
+    #   copy: src=index.html dest=/var/www/html/index.html owner=ccd group=ccd mode=0644
+      notify: 
+        - apache
+
+  handlers:   
+    - name: apache
+#      command: echo "Hello"
+      ansible.builtin.service:
+        name: apache2 
+        state: stopped
+

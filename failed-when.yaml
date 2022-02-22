@@ -1,0 +1,15 @@
+---
+- name: Apache Service status
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Fail when Apache service is already running
+      shell: systemctl status apache2 |grep running
+      register: apache_result
+      failed_when: "'running' in apache_result.stdout"
+    - name: Restart Apache Service
+      service:
+        name: apache2
+        state: restarted
+

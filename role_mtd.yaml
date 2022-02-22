@@ -1,0 +1,7 @@
+---
+- name: Creaitng first playbook with roles
+  become: true
+  hosts: all
+  roles:
+  - role: motd
+    system_manager: system_manager

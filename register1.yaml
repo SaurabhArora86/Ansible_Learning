@@ -1,0 +1,14 @@
+---
+- name: Register Output of Service
+  become: true
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: starting vsftpd
+      service: name=vsftpd state=started enabled=yes
+    - name: Status of vsftpd
+      command: service vsftpd status
+      register: command_output
+    - name: Output of command
+      debug:
+        var: command_output 

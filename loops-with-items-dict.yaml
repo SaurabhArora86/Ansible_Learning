@@ -1,0 +1,12 @@
+---
+- name: With items with Dict
+  hosts: all
+  become: true
+  gather_facts: no
+  vars_files:
+    - values_loops_items_dict.yaml
+  tasks:
+    - name: Loops with items having dictionary
+      debug:
+        msg: " {{item.name}} value is {{item.state}} "
+      with_items: "{{ package_name }}"

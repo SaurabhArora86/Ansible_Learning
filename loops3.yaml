@@ -1,0 +1,15 @@
+---
+- name: Looping over Dictionary
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Dictionary print
+      debug:
+        msg: "The Key is {{item.key}} and Value is {{item.value}}"
+      loop: "{{user_types | dict2items}}"
+      vars:
+        user_types:
+          Key1: "Value1"
+          Key2: "Value2"
+        

@@ -1,0 +1,10 @@
+---
+- name: Template with Loops Example
+  become: true
+  gather_facts: false
+  hosts: all
+  vars:
+    usernames: ["Alice", "Bob"]
+  tasks:
+    - name: Using template for item Loops
+      template: src=sample_template/template_with_loop_example.j2 dest=/home/ccd/template_with_loop_example.html mode=0775

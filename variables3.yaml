@@ -1,0 +1,14 @@
+---
+- name: Setting up Apache webserver
+  hosts: all
+  become: true
+  tasks:
+    - include_vars:
+        file: vars.yaml
+        name: site
+    - debug: msg= "Hello, {{ name }}"
+    # - name: Install apache packages
+    #     apt: name= '{{ package_name }}' state=present
+
+    # - name: ensure apache service is running
+    #     service: name= '{{ service_name }}' state=started

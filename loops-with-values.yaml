@@ -1,0 +1,12 @@
+---
+- name: Loops with Values
+  hosts: all
+  become: true
+  gather_facts: no
+  vars_files:
+    - values_loops_items.yaml
+  tasks:
+    - name: Loops with Values tasks
+      debug:
+        msg: "User name is {{ item }}"
+      with_items: "{{ user_name }}"

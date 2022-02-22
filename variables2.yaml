@@ -1,0 +1,15 @@
+---
+- name: Using vars file
+  hosts: all
+  vars_files:
+  - vars.yaml
+  tasks:
+    - name: Checking site
+      uri:
+        url: https://{{ site }}.com
+      register: command_output
+    - debug:
+        var: command_output.status
+
+
+

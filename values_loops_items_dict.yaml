@@ -1,0 +1,5 @@
+package_name:
+  - name: "vsftp"
+    state: present
+  - name: "ntpd"
+    state: present

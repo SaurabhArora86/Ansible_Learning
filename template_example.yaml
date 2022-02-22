@@ -1,0 +1,10 @@
+---
+- name: Sample Template file copy
+  hosts: all
+  gather_facts: yes
+  become: true
+  vars:
+    machine_name: saurabh_machine
+  tasks:
+    - name: Copy the synamic template file
+      template: src=sample_template/template_file.j2 dest=/home/ccd/template.html mode=0775

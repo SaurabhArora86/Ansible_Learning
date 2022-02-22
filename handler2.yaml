@@ -1,0 +1,18 @@
+---
+- name: Restart Vfstp using handlers
+  hosts: all
+  gather_facts: no
+  vars:
+    service_name: "vsftpd"
+  tasks:
+    - name: VSFTP Installation and executing handlers
+      apt:
+        name: "{{service_name}}"
+        state: present
+      notify: restart_vsftpd
+      become: true
+  handlers:
+    - name: restart_vsftpd
+      service: name={{service_name | default ('vsftpd')}} state=restarted
+      become: true
+    

@@ -1,0 +1,22 @@
+---
+- name: Identify System to install nginx
+  hosts: all
+  become: true
+
+  vars_files:
+  - package.yaml
+  tasks:
+    - name: Identifying System to install nginx
+      apt:
+        name: "{{ name }}"
+        state: latest
+        # default_release: squeeze-backports
+        update_cache: yes
+      when: ansible_os_family=="Debian"
+    - name: Ensure service is running
+      service:
+        name: "{{ name }}"
+        state: started
+
+
+

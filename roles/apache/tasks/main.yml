@@ -1,0 +1,12 @@
+---
+# tasks file for apache
+- import_tasks: apt_udate.yaml
+- import_tasks: install_apache.yaml
+
+  post_tasks:
+    - name: install contents from local file
+      copy:
+        src: files/
+        dest: "/var/www/html"
+      changed_when: true  ## This is to forcefully mark a change
+      notify: restart_httpd

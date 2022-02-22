@@ -1,0 +1,17 @@
+---
+- name: Install Apache Server
+  become: true
+  become_user: ccd
+  hosts: virtualmachine
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+    - name: copy index file
+      copy: src=index.html dest=/var/www/html/index.html owner=ccd group=ccd mode=0644
+    - name: Ensure Apache is running
+      service:
+        name: apache2
+        state: started
+

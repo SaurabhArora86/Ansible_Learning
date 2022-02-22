@@ -1,0 +1,19 @@
+---
+- name: First Async job
+  become: true
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: Sleep job for 60 sec
+      command: /bin/sleep 60
+      async: 80 # the total time allowed to complete the sleep task
+      poll: 0 # No need to poll just fire and forget the sleep command
+      register: sleeping_node
+    - name: task-2 to create a test user
+      user: name=async_test-2 state=present shell=/bin/bash
+    - name: Checking the Job Status running in background
+      async_status:
+        jid: "{{ sleeping_node.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished # Retry within limit until the job status changed to "finished": 1
+      retries: 20

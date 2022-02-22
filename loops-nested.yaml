@@ -1,0 +1,14 @@
+---
+- name: Nested loops example
+  become: true
+  hosts: all
+  gather_facts: no
+  vars_files:
+    - values_nested_loops.yaml
+  tasks:
+    - name: Parsing nested loop
+      debug:
+        msg: "Nested loop first {{ item[0] }} and value in file {{ item[1] }}"
+      with_nested:
+        - ['test1', 'test2']
+        - "{{keys}}"

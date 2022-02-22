@@ -1,0 +1,14 @@
+---
+- name: LineinFile Example
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: LineInfile Example with file creation and adding text after first match
+      lineinfile:
+          path: /home/ccd/mytextfile.txt
+          insertafter: "Example Name0"
+          line: "Add my name"
+          firstmatch: yes
+          state: present
+          create: yes
+          backup: yes

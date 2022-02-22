@@ -1,0 +1,10 @@
+---
+- name: Variable Declaration
+  hosts: all
+  gather_facts: true
+  vars:
+    citation: "Hello I am a variable"
+  tasks:
+    - name: This is variable consumption
+      debug:
+        msg: '{{ citation }}'
